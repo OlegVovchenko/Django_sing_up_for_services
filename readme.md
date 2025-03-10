@@ -1,0 +1,1 @@
+https://github.com/OlegVovchenko/Django_sing_up_for_services.git
