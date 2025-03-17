@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView, ListView
 from django.shortcuts import redirect
-from .forms import VisitForm,  ReviewForm
+from .forms import VisitForm, ReviewForm
 from .models import Master, Service, Visit
 from django.views.generic.edit import CreateView
 from django.db.models import Q

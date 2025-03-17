@@ -12,7 +12,7 @@ class VisitForm(forms.ModelForm):
             'master': forms.Select(attrs={'class': 'form-control'}),
             'services': forms.SelectMultiple(attrs={'class': 'form-control'}),
         }
-Class ReviewForm(forms.ModelForm):
+class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['name', 'text', 'master', 'rating']
