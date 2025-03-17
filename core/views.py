@@ -1,6 +1,6 @@
-from django.views.generic import TemplateView, View, ListView
-from django.shortcuts import render, redirect
-from .forms import VisitForm
+from django.views.generic import TemplateView, ListView
+from django.shortcuts import redirect
+from .forms import VisitForm,  ReviewForm
 from .models import Master, Service, Visit
 from django.views.generic.edit import CreateView
 from django.db.models import Q
@@ -39,7 +39,7 @@ class VisitListView(ListView):
     model = Visit
     template_name = "visit_list.html"
     context_object_name = "visits"
-    paginate_by = 1
+    paginate_by = 5
 
     def get_queryset(self):
         """Формируем QuerySet с учетом поиска и фильтрации по мастеру"""
@@ -74,3 +74,13 @@ class VisitListView(ListView):
         if not request.user.is_staff:
             return redirect("main_page")  # Перенаправляем на главную страницу
         return super().dispatch(request, *args, **kwargs)
+
+class ReviewCreateView(CreateView):
+    template_name = "review_form.html"
+    form_class = ReviewForm
+    success_url = '/#reviews' # Редирект на секцию отзывов
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu"] = MENU
+        return context

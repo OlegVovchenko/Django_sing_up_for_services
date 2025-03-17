@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinLengthValidator
 
 class Visit(models.Model):
 
@@ -51,4 +52,49 @@ class Service(models.Model):
         verbose_name = 'Услуга'
         verbose_name_plural = 'Услуги'
     
-    
+"""
+Модель отзыв
+Поля
+- Имя
+- Текст
+- Мастер (Внешний ключ)
+- Рейтиг
+    - Ужасно
+    - Плохо
+    - Нормально
+    - Хорошо
+    - Отлично
+- Дата создания (автоматически)
+- Статус
+- Статус
+    - Опубликован
+    - Не проверен
+    - Одобрен
+    - Отклонен
+"""
+
+class Review(models.Model):
+    STATUS_CHOICES = [
+        (0, 'Опубликован'),
+        (1, 'Не проверен'),
+        (2, 'Одобрен'),
+        (3, 'Отклонен'),
+    ]
+    RAITING_CHOICES = [
+        (1, 'Ужасно'),
+        (2, 'Плохо'),
+        (3, 'Нормально'),
+        (4, 'Хорошо'),
+        (5, 'Отлично'),
+    ]
+
+    name = models.CharField(max_length=50, verbose_name='Имя')
+    text = models.TextField(max_length=400, verbose_name='Текст', validators=[MinLengthValidator(30)])
+    master = models.ForeignKey('Master', on_delete=models.CASCADE, verbose_name='Мастер')
+    rating = models.IntegerField(choices=RAITING_CHOICES, verbose_name='Рейтинг')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    status = models.IntegerField(choices=STATUS_CHOICES, default=1, verbose_name='Статус')
+
+    class Meta:
+        verbose_name = 'Отзыв'
+        verbose_name_plural = 'Отзывы'
