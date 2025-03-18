@@ -80,6 +80,43 @@
     </div>
 </section>
 
+<!--Отзывы-->
+<section id="reviews" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4">Отзывы наших клиентов</h2>
+        <p class="text-center text-muted mb-5">Узнайте, что говорят о нас посетители</p>
+        
+        <div class="row">
+            {% for review in reviews %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ review.name }}</h5>
+                        <p class="text-warning mb-2">
+                            {% for i in "12345"|make_list %}
+                                {% if forloop.counter <= review.rating %}
+                                    <i class="bi bi-star-fill"></i>
+                                {% else %}
+                                    <i class="bi bi-star"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+                        <p class="card-text">{{ review.text }}</p>
+                        <p class="text-muted mb-0">Мастер: {{ review.master }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'review_create' %}" class="btn btn-warning btn-lg">
+                <i class="bi bi-pencil-square me-2"></i>Оставить отзыв
+            </a>
+        </div>
+    </div>
+</section>
+
 <!--Форма записи-->
 <section id="orderForm" class="py-5 bg-dark text-white">
     <div class="container">

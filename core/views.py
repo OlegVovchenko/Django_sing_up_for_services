@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView, ListView
 from django.shortcuts import redirect
 from .forms import VisitForm, ReviewForm
-from .models import Master, Service, Visit
+from .models import Master, Service, Visit, Review
 from django.views.generic.edit import CreateView
 from django.db.models import Q
 
@@ -10,8 +10,8 @@ MENU = [
     {"title": "Главная", "url": "/", "active": True},
     {"title": "Мастера", "url": "/#masters/", "active": True},
     {"title": "Услуги", "url": "/#services/", "active": True},
-    # {'title': 'Отзывы', 'url': '/#reviews/', 'active': True},
-    # {'title': 'Оставить отзыв', 'url': '/reviews/create/', 'active': True},
+    {'title': 'Отзывы', 'url': '/#reviews/', 'active': True},
+    {'title': 'Оставить отзыв', 'url': '/reviews/create/', 'active': True},
     {"title": "Запись на стрижку", "url": "/#orderForm", "active": True},
 ]
 
@@ -32,6 +32,7 @@ class IndexView(CreateView):
         context["menu"] = MENU
         context["masters"] = Master.objects.all()
         context["services"] = Service.objects.all()
+        context["reviews"] = Review.objects.filter(status=0).order_by('-created_at')[:6]  # Показываем 6 последних опубликованных отзывов
         return context
 
 
