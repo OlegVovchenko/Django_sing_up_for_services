@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 /* Общие стили */
 body {
     background-color: #ffffff;
