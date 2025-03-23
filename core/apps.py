@@ -7,5 +7,4 @@ class CoreConfig(AppConfig):
     verbose_name = 'Барбершоп'
 
     def ready(self):
-        # import core.signals  # Импорт сигналов из core.signals
-        pass
+        import core.signals  # Импорт сигналов из core.signals
