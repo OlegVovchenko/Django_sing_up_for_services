@@ -1,6 +1,49 @@
 from django.contrib import admin
 from .models import Visit, Master, Service, Review
 from django.db.models import Sum, Count, Q
+from django.contrib import messages
+
+# Функции-обработчики для массового изменения статусов отзывов
+
+
+def make_published(modeladmin, request, queryset):
+    """Установить статус 'Опубликован' для выбранных отзывов"""
+    updated = queryset.update(status=0)
+    modeladmin.message_user(
+        request, f"{updated} отзывов успешно опубликовано", messages.SUCCESS
+    )
+
+
+make_published.short_description = "Опубликовать выбранные отзывы"
+
+
+def mark_as_unverified(modeladmin, request, queryset):
+    """Установить статус 'Не проверен' для выбранных отзывов"""
+    updated = queryset.update(status=1)
+    modeladmin.message_user(
+        request, f"{updated} отзывов отмечено как непроверенные", messages.SUCCESS
+    )
+
+
+mark_as_unverified.short_description = "Отметить как непроверенные"
+
+
+def approve_reviews(modeladmin, request, queryset):
+    """Установить статус 'Одобрен' для выбранных отзывов"""
+    updated = queryset.update(status=2)
+    modeladmin.message_user(request, f"{updated} отзывов одобрено", messages.SUCCESS)
+
+
+approve_reviews.short_description = "Одобрить выбранные отзывы"
+
+
+def reject_reviews(modeladmin, request, queryset):
+    """Установить статус 'Отклонен' для выбранных отзывов"""
+    updated = queryset.update(status=3)
+    modeladmin.message_user(request, f"{updated} отзывов отклонено", messages.SUCCESS)
+
+
+reject_reviews.short_description = "Отклонить выбранные отзывы"
 
 
 # Определяем кастомные фильтры
