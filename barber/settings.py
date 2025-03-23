@@ -28,11 +28,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    '194.87.56.160'
+    '194.87.56.160',
+    'olegvovchenko-django-sing-up-for-services-7463.twc1.net'
 ]
 
 # CSRAF настройки для безопасности отправки форм
@@ -41,6 +42,8 @@ CSRF_TRUSTED_ORIGINS = [
     'https://127.0.0.1',
     'http://194.87.56.160',
     'https://194.87.56.160',
+    'http://olegvovchenko-django-sing-up-for-services-7463.twc1.net',
+    'https://olegvovchenko-django-sing-up-for-services-7463.twc1.net',
 ]
 
 # Application definition
