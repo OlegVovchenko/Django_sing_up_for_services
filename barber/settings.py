@@ -156,13 +156,19 @@ JAZZMIN_SETTINGS = {
     "user_avatar": None,
     
     # Определение пользовательских стилей для улучшения внешнего вида
-    "custom_css": "css/custom_admin.css",
+    "custom_css": "css/mini_fix.css",
     
     # Настройка иконок для лучшего визуального восприятия
     "icons": {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
         "auth.group": "fas fa-users",
+
+        # Иконки для моделей барбершопа
+        "core.visit": "fas fa-calendar-check",     # Запись на стрижку
+        "core.master": "fas fa-cut",               # Мастер (ножницы)
+        "core.service": "fas fa-list-alt",         # Услуга
+        "core.review": "fas fa-star",              # Отзыв (звезда)
     },
     
     # Добавляем связанные модели для удобной навигации
@@ -192,13 +198,14 @@ JAZZMIN_UI_TWEAKS = {
     "no_navbar_border": False,
     
     # Настройки кнопок
+    # Настройка всех типов кнопок для согласованности
     "button_classes": {
-        "primary": "btn-primary",
+        "primary": "btn-warning",  # Меняем на warning для согласованности с темой
         "secondary": "btn-secondary",
-        "info": "btn-warning",  # Меняем на warning для согласованности с темой
+        "info": "btn-warning",  
         "warning": "btn-warning",
         "danger": "btn-danger",
-        "success": "btn-success"
+        "success": "btn-outline-warrning",
     },
     
     # Настраиваем стили текста в фильтрах
