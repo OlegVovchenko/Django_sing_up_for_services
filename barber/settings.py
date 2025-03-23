@@ -30,8 +30,18 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if os.getenv('DEBUG', 'True') == 'True' else False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    '92.53.107.211'
+]
 
+# CSRAF настройки для безопасности отправки форм
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1',
+    'https://127.0.0.1',
+    'http://92.53.107.211',
+    'https://92.53.107.211',
+]
 
 # Application definition
 
